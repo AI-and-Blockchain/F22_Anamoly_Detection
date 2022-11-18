@@ -1,1 +1,5 @@
+# Folder that contains /elliptic_bitcoin_dataset/*.csv
 datasets
+
+# Venv
+blockchain/ 
