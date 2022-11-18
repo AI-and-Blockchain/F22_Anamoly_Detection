@@ -1,7 +1,7 @@
 import csv
 import time
 import pickle
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import urllib.request
 import json
 
@@ -24,32 +24,32 @@ def load_dataset():
         features = [row for row in csv.reader(csvfile, delimiter=',')]
     # end = time.time()
     # print("Read from .csv files in:", end-start)
-    # return classes, edges, features
+    return classes, edges, features
 
 
-    users = {}
-    for edge in edges:
-        for u in edge:
-            if u not in users.keys():
-                users[u] = 0
-            users[u] += 1
+    # users = {}
+    # for edge in edges:
+    #     for u in edge:
+    #         if u not in users.keys():
+    #             users[u] = 0
+    #         users[u] += 1
 
-    degrees = {}
-    for user in users.keys():
-        if users[user] not in degrees.keys():
-            degrees[users[user]] = 0
-        degrees[users[user]] += 1
+    # degrees = {}
+    # for user in users.keys():
+    #     if users[user] not in degrees.keys():
+    #         degrees[users[user]] = 0
+    #     degrees[users[user]] += 1
 
-    print("Number of Users", len(users.keys()))
-    print("Number of Transactions", len(edges))
-    for key in sorted(degrees.keys()):
-        plt.plot(key, degrees[key], 'b.')
-    plt.yscale('log')
-    plt.savefig('figures/degree_distribution.png')
-    plt.clf()
+    # print("Number of Users", len(users.keys()))
+    # print("Number of Transactions", len(edges))
+    # for key in sorted(degrees.keys()):
+    #     plt.plot(key, degrees[key], 'b.')
+    # plt.yscale('log')
+    # plt.savefig('figures/degree_distribution.png')
+    # plt.clf()
 
-    print("Number of Labels", len(classes))
-    print("Number of features", len(features))
+    # print("Number of Labels", len(classes))
+    # print("Number of features", len(features))
 
     # return classes, edges, features
 
@@ -85,22 +85,50 @@ def load_dataset():
 
 def get_txn_real():
 
+    datapath = "datasets/"
+    real_txns = {}
+    with open(datapath + "Result.csv") as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        next(reader)
+        for row in reader:
+            real_txns[row[0]] = row[1]
+
+
     # For each transaction in list,
     # pull json data from url
     # first id -> update out data, txn value, time
     # second id -> update in data, txn value, time
     # get time from block url req, store in map for the blocks.
 
-    url = 'https://blockchain.info/rawtx/' + 'd6176384de4c0b98702eccb97f3ad6670bc8410d9da715fe5b49462d3e603993'
-    with urllib.request.urlopen(url) as ul:
-        data = json.load(ul)
-        for key in data.keys():
-            print(key, data[key])
+    edge_network = {}
+    for key in real_txns.keys():
+        edge_network[key] = {}
+        url = 'https://blockchain.info/rawtx/' + real_txns[key]
+        try:
+            with urllib.request.urlopen(url) as ul:
+                data = json.load(ul)
+                edge_network[key]['in_deg'] = 0
+                edge_network[key]['out_deg'] = 0
+                edge_network[key]['value'] = data['inputs'][0]['prev_out']['value']
+                edge_network[key]['time'] = data['time']
+        except:
+            continue
 
-get_txn_real()
-# load_dataset()
+    
+    return edge_network
+    
 
+classes, edges, features = load_dataset()
+edge_network = get_txn_real()
 
+for edge in edges:
+    if edge[0] in edge_network.keys() and edge[1] in edge_network.keys():
+        edge_network[edge[0]]['in_deg'] += 1
+        edge_network[edge[1]]['out_deg'] += 1
+        
+efile = open('datasets/' + "real_edges", 'wb')
+pickle.dump(edge_network, efile)
+efile.close()
 
 
 # 230425980 74d9bb85c6bbc471c6e18f409d23c3ef1191725bdb90376fdff66fd31da41043
