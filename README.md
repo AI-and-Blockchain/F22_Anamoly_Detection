@@ -6,6 +6,8 @@ datasets/
         -elliptic_txs_classes.csv
         -elliptic_txs_edgelist.csv
         -elliptic_txs_features.csv
+    -pickles
+        -real_edges
     -Result.csv
 ```
 
