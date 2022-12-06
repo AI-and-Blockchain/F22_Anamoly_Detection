@@ -6,6 +6,8 @@ class MahalanobisDistenceMethod():
     Implements the Mahalanobis distence method for anomaly detection.
 
     Methods:
+        set_epsilon: Update threshold for classification.
+        parameters: Returns the multivariate normal model parameters.
         fit: Fits MD method to a dataset.
         predict: Runs prediction using MD method on a dataset.
         classify: Runs classification using MD method on a dataset.
