@@ -1,5 +1,10 @@
 # Folder that contains /elliptic_bitcoin_dataset/*.csv
 datasets
 
+# folders
+data
+.ipynb_checkpoints
+__pycache__
+
 # Venv
 blockchain/ 
