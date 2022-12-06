@@ -157,4 +157,4 @@ def create_feature_dataframe(data_df):
     return pd.DataFrame(feature_dict).fillna(0)
 
 def MDM(X, MUS, SIGMAS):
-    return np.sqrt((X-MUS).T @ np.linalg.inv(SIGMAS) @ (X-MUS))
+    return 1 / (2*np.sqrt((2*np.pi)**max(X.shape) * np.linalg.det(SIGMAS))) * np.exp(-1/2 * (X-MUS).T @ np.linalg.inv(SIGMAS) @ (X-MUS))
