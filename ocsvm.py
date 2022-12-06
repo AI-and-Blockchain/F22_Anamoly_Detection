@@ -21,7 +21,7 @@ class OneClassSVMMethod():
 		"""
 		self._epsilon = epsilon
 
-		self.model = OneClassSVM(**kwargs)
+		self._model = OneClassSVM(**kwargs)
 
 	def fit(self, X, **kwargs):
 		"""
@@ -59,10 +59,10 @@ class OneClassSVMMethod():
 		of features which is the same size as the number of features the model was fit on.
 
 		Returns:
-		[numpy.ndarray]: Array of classifications based on epsilon where 1 means anomaly and 0 mean non-anomaly.
+		[numpy.ndarray]: Array of classifications based on epsilon where 0 means anomaly and 1 mean non-anomaly.
 		"""
-		scores = self.predict(X, normalize)
-		return scores < self._epsilon
+		scores = self.predict(X, True)
+		return scores > self._epsilon
 
 	def evaluate(self, X, y):
 		"""
