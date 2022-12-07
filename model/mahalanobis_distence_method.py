@@ -130,7 +130,7 @@ class MahalanobisDistenceMethod():
         rec = [tp[0] / (tp[0] + fn[0]) if tp[0] + fn[0] != 0 else 0.0]
         f1s = [2 * prc[0] * rec[0] / (prc[0] + rec[0]) if prc[0] + rec[0] != 0 else 0.0]
 
-        for i, eps in enumerate(y_hats):
+        for i in range(len(y_hats)):
             y_cls[i] = 1
 
             if y_cls[i] == y[i]:
