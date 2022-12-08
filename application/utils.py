@@ -3,7 +3,7 @@ import pandas as pd
 
 def BENFORD(n, B):
     def ben(d):
-        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d)) for k in range(B**(n-1), B**n-1)])
+        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d)) for k in range(B**(n-2), B**n-1)])
     return ben
 
 def create_feature_dataframe(data_df):
@@ -157,4 +157,7 @@ def create_feature_dataframe(data_df):
     return pd.DataFrame(feature_dict).fillna(0)
 
 def MDM(X, MUS, SIGMAS):
-    return np.sqrt((X-MUS).T @ np.linalg.inv(SIGMAS) @ (X-MUS))
+    return (1 / np.sqrt((2*np.pi) ** X.shape[0] * np.linalg.det(SIGMAS))) * np.exp(-1/2 *   (X-MUS).T @ np.linalg.inv(SIGMAS) @ (X-MUS))
+
+def scaleParams(params, digits):
+    return [int(p * 10**digits) for p in params]
