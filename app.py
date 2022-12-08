@@ -66,7 +66,7 @@ def index():
 		print("Classification")
 		_c = CLASSIFICATION
 		CLASSIFICATION = None
-		return render_template("index.html", classification=_c, address=ADDRESS)
+		return render_template("index.html", classification=_c, address=ADDRESS, alert="success" if _c=="Trustworthy" else "warning")
 	return render_template("index.html")
 
 @app.route('/get_features', methods=["POST", "GET"])

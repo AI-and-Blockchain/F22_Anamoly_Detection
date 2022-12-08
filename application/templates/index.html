@@ -9,9 +9,15 @@
 	{% endif %}
 
 	{% if classification is defined %}
-		<div class="alert alert-success" role="alert">
-			{{ address }} seems to be a {{ classification }} address.
-		</div>
+		{% if classification=="Trustworthy" %}
+			<div class="alert alert-success" role="alert">
+				{{ address }} seems to be a {{ classification }} address.
+			</div>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				{{ address }} seems to be a {{ classification }} address.
+			</div>
+		{% endif %}
 	{% endif %}
 	<!-- <form name="transcationInput" method="post" action="javascript:validateForm()"> -->
 	<div class="container-fluid" style="padding: 2rem 1rem; margin-bottom: 2rem; border-radius: .3rem;">
