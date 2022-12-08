@@ -3,14 +3,7 @@ import pandas as pd
 
 def BENFORD(n, B):
     def ben(d):
-        if type(d) in (str, chr):
-            if d in [str(i) for i in range(1,10)]:
-                d = float(d)
-            else:
-                d = float(10 + 1 + (d.lower()-'a')) # shift digit to beginning of non-decimal values, add 1 to move forward
-        if n == 1:
-            return 1/np.log(B) * np.log(1 + 1/d)/np.log(10)
-        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d))/np.log(10) for k in range(B**(n-2), B**n-1)])
+        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d)) for k in range(B**(n-1), B**n-1)])
     return ben
 
 def create_feature_dataframe(data_df):
