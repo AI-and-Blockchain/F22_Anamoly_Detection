@@ -14,33 +14,57 @@
 		</div>
 	{% endif %}
 	<!-- <form name="transcationInput" method="post" action="javascript:validateForm()"> -->
-	<form name="transcationInput" method="post" action="{{ url_for('get_features') }}">
-		<div class="mb-3">
-			<label for="address" class="form-label">Ethereum Address to be classified</label>
-			<input type="text" name="address" class="form-control" id="addressInput" aria-describedby="addressHelp">
-			<div id="addressHelp" class="form-text">Make sure Ethereum Address is a properly formatted hexadecimal value</div>
-		</div>
-		<div class="mb-3">
-			<label for="gas" class="form-label">Gas to fuel transaction</label>
-			<input type="text" name="gas" class="form-control" id="gasInput" aria-describedby="gasHelp">
-			<div id="gasHelp" class="form-text">Gas quantity</div>
-		</div>
-		<div class="mb-3">
-			<label for="gasPrice" class="form-label">Gas price</label>
-			<input type="text" name="gasPrice" class="form-control" id="gasPriceInput" aria-describedby="gasPriceHelp">
-			<div id="gasPriceHelp" class="form-text">Gas price as gWei value</div>
-		<div class="mb-3">
-			<label for="account" class="form-label">Ethereum Testnet Address to pull funds from</label>
-			<input type="text" name="account" class="form-control" id="accountInput" aria-describedby="accountHelp">
-			<div id="accountHelp" class="form-text">Make sure Ethereum Address is a properly formatted hexadecimal value</div>
-		</div>
-		<div class="mb-3">
-			<label for="pk" class="form-label">Ethereum Testnet Address private key</label>
-			<input type="password" name="pk" class="form-control" id="pkInput" aria-describedby="pkHelp">
-			<div id="pkHelp" class="form-text">Make sure private key is typed correctly</div>
-		</div>
-		<button type="submit" class="btn btn-primary">Classify</button>
-	</form>
+	<div class="container-fluid" style="padding: 2rem 1rem; margin-bottom: 2rem; border-radius: .3rem;">
+		<form name="transcationInput" method="post" action="{{ url_for('get_features') }}">
+			<div class="row">
+				<div class="col">
+					<div class="mb-3">
+						<label for="address" class="form-label">Ethereum Address to be classified</label>
+						<input type="text" name="address" class="form-control" id="addressInput" aria-describedby="addressHelp">
+						<div id="addressHelp" class="form-text">Make sure Ethereum Address is a properly formatted hexadecimal value</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col">
+					<div class="mb-3">
+						<label for="gas" class="form-label">Gas to fuel transaction</label>
+						<input type="text" name="gas" class="form-control" id="gasInput" aria-describedby="gasHelp">
+						<div id="gasHelp" class="form-text">Gas quantity (we found 300,000 was plenty; 3,000 was not enough)</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="mb-3">
+						<label for="gasPrice" class="form-label">Gas price</label>
+						<input type="text" name="gasPrice" class="form-control" id="gasPriceInput" aria-describedby="gasPriceHelp">
+						<div id="gasPriceHelp" class="form-text">Gas price as gWei value</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col">
+					<div class="mb-3">
+						<label for="account" class="form-label">Ethereum Testnet Address to pull funds from</label>
+						<input type="text" name="account" class="form-control" id="accountInput" aria-describedby="accountHelp">
+						<div id="accountHelp" class="form-text">Make sure Ethereum Address is a properly formatted hexadecimal value</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="mb-3">
+						<label for="pk" class="form-label">Ethereum Testnet Address private key</label>
+						<input type="password" name="pk" class="form-control" id="pkInput" aria-describedby="pkHelp">
+						<div id="pkHelp" class="form-text">Make sure private key is typed correctly</div>
+					</div>
+				</div>
+			</div>
+			<div style="padding-left:46.5%;">
+				<button type="submit" class="btn btn-primary">Classify</button>
+			</div>
+			<hr/>
+		</form>
+	</div>
 
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 		<symbol id="check-circle-fill" viewBox="0 0 16 16">
@@ -59,7 +83,7 @@
 		NOTE: This is a DEVELOPMENT only platform. Any and all information entered will be stored on the web app during operating time. Do not enter any information you are not comfortable having leaked. We STRONGLY recommend using a TESTNET account for gas payment.
 	</div>
 
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
 		<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:" style="height:32px !important; width:32px !important"><use xlink:href="#info-fill"/></svg>
 		More Information
 	</button>
