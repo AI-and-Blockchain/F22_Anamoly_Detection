@@ -122,10 +122,10 @@ def get_features():
 	try:
 		txn_receipt = web3.eth.get_transaction_receipt(sent_txn)
 		print(f"TXN : {txn_receipt}")
-		CLASSIFICATION = "Legitimate" if txn_receipt["logs"][0]["return"] else "Illegitimate"
+		CLASSIFICATION = "Trustworthy" if txn_receipt["logs"][0]["return"] else "Not Trustworthy"
 	except:
 		time.sleep(5)
 		score = MDM(features, np.array(MUS), np.array(SIGMAS))
 		print(score)
-		CLASSIFICATION = "Legitimate" if score >= EPSILON else "Illegitimate"
+		CLASSIFICATION = "Trustworthy" if score >= EPSILON else "Not Trustworthy"
 	return redirect(url_for(".index"))

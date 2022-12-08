@@ -3,7 +3,9 @@ import pandas as pd
 
 def BENFORD(n, B):
     def ben(d):
-        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d)) for k in range(B**(n-2), B**n-1)])
+        if n == 1:
+            return 1/np.log(B) * np.log(1 + 1/d)/np.log(10)
+        return 1/np.log(B) * np.sum([np.log(1 + 1/(k*B+d))/np.log(10) for k in range(B**(n-2), B**n-1)])
     return ben
 
 def create_feature_dataframe(data_df):
