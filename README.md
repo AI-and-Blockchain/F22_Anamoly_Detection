@@ -16,6 +16,7 @@ flask --app app --debug run
 
 # Folders
 * application - Contains flask app files.
+* data - Contains data processing notebook.
 * figures - Figures used for final report.
 * model - Model and experiment files.
 * smart_contract - Smart contract files.
